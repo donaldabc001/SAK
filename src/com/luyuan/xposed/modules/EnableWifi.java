@@ -1,0 +1,100 @@
+package com.luyuan.xposed.modules;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import org.xmlpull.v1.XmlPullParser;
+
+import android.os.Environment;
+import android.util.Log;
+import android.util.Xml;
+
+import com.luyuan.xposed.Xposed;
+import de.robv.android.xposed.XC_MethodHook;
+import de.robv.android.xposed.XposedBridge;
+import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
+
+public class EnableWifi {
+
+	public static void handleLoadPackage(LoadPackageParam lpparam) {
+		if (!lpparam.packageName.equals("com.android.providers.settings"))
+			return;
+
+		XposedHelpers.findAndHookMethod("com.android.server.WifiService",
+				XposedBridge.BOOTCLASSLOADER, "getPersistedWifiState", new XC_MethodHook() {
+
+					@Override
+					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+						// TODO Auto-generated method stub
+						int open = (Integer) getSystemProperties("getInt", "persist.sys.wifi.open",
+								0);
+						if (open == 0) {
+							Xposed.RootCommand("setprop persist.sys.wifi.open 1");
+							String mProject = getProjectName();
+							if (mProject != null && mProject.startsWith("aixing")) {
+								param.setResult(1);
+							}
+						}
+					}
+				});
+	}
+
+	public static Object getSystemProperties(String methodName, String propName, Object defaultValue) {
+		Class<?> clazz = XposedHelpers.findClass("android.os.SystemProperties",
+				XposedBridge.BOOTCLASSLOADER);
+		Object object = XposedHelpers.callStaticMethod(clazz, methodName, propName, defaultValue);
+		return object;
+	}
+
+	public static String getProjectName() {
+		File sdCardDir = Environment.getExternalStorageDirectory();
+		File saveDir = new File(sdCardDir, "Android/luyuan");
+		File xmlFile = new File("/system/etc/luyuan_system_configuration.xml");
+		if (saveDir.exists()) {
+			File customFile = new File(saveDir, "luyuan_system_configuration.xml");
+			if (customFile.exists()) {
+				xmlFile = customFile;
+			}
+		}
+		try {
+			FileInputStream inputStream = new FileInputStream(xmlFile);
+			String string = readXML(inputStream);
+			inputStream.close();
+			return string;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private static String readXML(InputStream inStream) {
+		XmlPullParser parser = Xml.newPullParser();
+		try {
+			parser.setInput(inStream, "UTF-8");
+			int eventType = parser.getEventType();
+
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+				switch (eventType) {
+				case XmlPullParser.START_DOCUMENT:
+					break;
+				case XmlPullParser.START_TAG:
+					String name = parser.getName();
+					if (name.equalsIgnoreCase("ProjectName")) {
+						return parser.nextText();
+					}
+					break;
+				case XmlPullParser.END_TAG:
+					break;
+				}
+				eventType = parser.next();
+			}
+			inStream.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}
