@@ -6,6 +6,7 @@ import java.io.InputStream;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
@@ -22,24 +23,29 @@ public class EnableWifi {
 		if (!lpparam.packageName.equals("com.android.providers.settings"))
 			return;
 
-		XposedHelpers.findAndHookMethod("com.android.server.WifiService",
-				XposedBridge.BOOTCLASSLOADER, "getPersistedWifiState", new XC_MethodHook() {
+		XposedHelpers.findAndHookMethod(
+				Build.VERSION.SDK_INT < 19 ? "com.android.server.WifiService"
+						: "com.android.server.wifi.WifiSettingsStore",
+				XposedBridge.BOOTCLASSLOADER, "getPersistedWifiState",
+				new XC_MethodHook() {
 
 					@Override
-					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+					protected void afterHookedMethod(MethodHookParam param)
+							throws Throwable {
 						// TODO Auto-generated method stub
-						int open = (Integer) getSystemProperties("getInt", "persist.sys.wifi.open",
-								0);
+						int open = (Integer) getSystemProperties("getInt",
+								"persist.sys.wifi.open", 0);
 						if (open == 0) {
 							Xposed.RootCommand("setprop persist.sys.wifi.open 1");
 							String mProject = getProjectName();
-							if (mProject != null && mProject.startsWith("aixing")) {
+							if (mProject != null
+									&& mProject.startsWith("aixing")) {
 								param.setResult(1);
 							}
 						}
 					}
 				});
-	}
+		}
 
 	public static Object getSystemProperties(String methodName, String propName, Object defaultValue) {
 		Class<?> clazz = XposedHelpers.findClass("android.os.SystemProperties",
