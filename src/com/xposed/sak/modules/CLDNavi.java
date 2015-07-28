@@ -1,6 +1,6 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
 
 import android.app.Application;
 import android.media.AudioManager;

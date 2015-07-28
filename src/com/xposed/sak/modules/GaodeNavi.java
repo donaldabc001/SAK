@@ -1,4 +1,4 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import android.app.Application;
 import android.content.Context;
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;

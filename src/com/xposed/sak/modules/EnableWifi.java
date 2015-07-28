@@ -1,4 +1,4 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;

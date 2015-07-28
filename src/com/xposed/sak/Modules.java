@@ -1,16 +1,16 @@
-package com.luyuan.xposed;
+package com.xposed.sak;
 
-import com.luyuan.xposed.modules.BaiduNavi;
-import com.luyuan.xposed.modules.CLDNavi;
-import com.luyuan.xposed.modules.ClearNotification;
-import com.luyuan.xposed.modules.EnableWifi;
-import com.luyuan.xposed.modules.GaodeNavi;
-import com.luyuan.xposed.modules.CanBusLauncherIcon;
-import com.luyuan.xposed.modules.MonitorBroadcast;
-import com.luyuan.xposed.modules.MonitorStreamValue;
-import com.luyuan.xposed.modules.StatusBarOutTemp;
-import com.luyuan.xposed.modules.StatusBarStatus;
-import com.luyuan.xposed.modules.StopAppStart;
+import com.xposed.sak.modules.BaiduNavi;
+import com.xposed.sak.modules.CLDNavi;
+import com.xposed.sak.modules.CanBusLauncherIcon;
+import com.xposed.sak.modules.ClearNotification;
+import com.xposed.sak.modules.EnableWifi;
+import com.xposed.sak.modules.GaodeNavi;
+import com.xposed.sak.modules.MonitorBroadcast;
+import com.xposed.sak.modules.MonitorStreamValue;
+import com.xposed.sak.modules.StatusBarOutTemp;
+import com.xposed.sak.modules.StatusBarStatus;
+import com.xposed.sak.modules.StopAppStart;
 
 import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;

@@ -1,10 +1,10 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import android.content.ComponentName;
 import android.content.Intent;
 import android.util.Log;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;

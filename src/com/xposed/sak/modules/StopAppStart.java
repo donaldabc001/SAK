@@ -1,4 +1,4 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import java.io.EOFException;
 import java.io.File;
@@ -20,7 +20,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
-import com.luyuan.xposed.Xposed;
+
+import com.xposed.sak.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
