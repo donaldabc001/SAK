@@ -7,7 +7,7 @@ LOCAL_JAVA_LIBRARIES := xposed
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_PACKAGE_NAME := Xposed
+LOCAL_PACKAGE_NAME := SAK
 
 LOCAL_CERTIFICATE := platform
 
