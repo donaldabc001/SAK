@@ -217,12 +217,12 @@ public class StopAppStart {
 								String packageName = intent.getComponent().getPackageName();
 								String className = intent.getComponent().getClassName();
 								Log.d(TAG, "start activity: " + packageName + "/" + className);
-								for (ActivityInfo activityInfo : mActivityInfos) {
+								for (int i = 0; i < mActivityInfos.size(); i++) {
+									ActivityInfo activityInfo = mActivityInfos.get(i);
 									if (className.equals(activityInfo.getClassName())
 											&& !activityInfo.isVisible()) {
-										Log.d(TAG, "stop activity: " + packageName + "/"
-												+ className);
-										param.setResult(0);
+										activityInfo.setVisible(true);
+										break;
 									}
 								}
 							}
