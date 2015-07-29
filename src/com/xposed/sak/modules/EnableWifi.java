@@ -1,4 +1,4 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,11 +6,13 @@ import java.io.InputStream;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
+
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
@@ -18,20 +20,33 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage.LoadPackageParam;
 
 public class EnableWifi {
 
+	public static int index = 0;
+	public static int count = getRepeatCount();
+
+	public static int getRepeatCount() {
+		return Build.VERSION.SDK_INT < 19 ? 1 : 2;
+	}
+
 	public static void handleLoadPackage(LoadPackageParam lpparam) {
 		if (!lpparam.packageName.equals("com.android.providers.settings"))
 			return;
 
-		XposedHelpers.findAndHookMethod("com.android.server.WifiService",
+		XposedHelpers.findAndHookMethod(
+				Build.VERSION.SDK_INT < 19 ? "com.android.server.WifiService"
+						: "com.android.server.wifi.WifiSettingsStore",
 				XposedBridge.BOOTCLASSLOADER, "getPersistedWifiState", new XC_MethodHook() {
 
 					@Override
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						// TODO Auto-generated method stub
+
 						int open = (Integer) getSystemProperties("getInt", "persist.sys.wifi.open",
 								0);
 						if (open == 0) {
-							Xposed.RootCommand("setprop persist.sys.wifi.open 1");
+							index++;
+							if (index == count) {
+								Xposed.RootCommand("setprop persist.sys.wifi.open 1");
+							}
 							String mProject = getProjectName();
 							if (mProject != null && mProject.startsWith("aixing")) {
 								param.setResult(1);

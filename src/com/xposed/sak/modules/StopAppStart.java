@@ -1,4 +1,4 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import java.io.EOFException;
 import java.io.File;
@@ -20,7 +20,8 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.util.Log;
-import com.luyuan.xposed.Xposed;
+
+import com.xposed.sak.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedBridge;
@@ -112,23 +113,18 @@ public class StopAppStart {
 			oos.flush();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			try {
 				oos.flush();
 				oos.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
@@ -146,28 +142,21 @@ public class StopAppStart {
 			mActivityInfos = (ArrayList<ActivityInfo>) o;
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (EOFException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} finally {
 			try {
 				ois.close();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 
 			if (mActivityInfos == null) {
@@ -228,12 +217,12 @@ public class StopAppStart {
 								String packageName = intent.getComponent().getPackageName();
 								String className = intent.getComponent().getClassName();
 								Log.d(TAG, "start activity: " + packageName + "/" + className);
-								for (ActivityInfo activityInfo : mActivityInfos) {
+								for (int i = 0; i < mActivityInfos.size(); i++) {
+									ActivityInfo activityInfo = mActivityInfos.get(i);
 									if (className.equals(activityInfo.getClassName())
 											&& !activityInfo.isVisible()) {
-										Log.d(TAG, "stop activity: " + packageName + "/"
-												+ className);
-										param.setResult(0);
+										activityInfo.setVisible(true);
+										break;
 									}
 								}
 							}

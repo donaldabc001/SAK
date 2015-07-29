@@ -1,4 +1,4 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;

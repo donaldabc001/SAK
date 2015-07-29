@@ -1,10 +1,10 @@
-package com.luyuan.xposed.modules;
+package com.xposed.sak.modules;
 
 import android.app.Activity;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
 
-import com.luyuan.xposed.Xposed;
+import com.xposed.sak.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XposedHelpers;
