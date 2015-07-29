@@ -40,8 +40,7 @@ public class EnableWifi {
 					protected void afterHookedMethod(MethodHookParam param) throws Throwable {
 						// TODO Auto-generated method stub
 
-						int open = (Integer) getSystemProperties("getInt", "persist.sys.wifi.open",
-								0);
+						int open = (Integer) Xposed.getSystemProperties("getInt", "persist.sys.wifi.open", 0);
 						if (open == 0) {
 							index++;
 							if (index == count) {
@@ -54,13 +53,6 @@ public class EnableWifi {
 						}
 					}
 				});
-	}
-
-	public static Object getSystemProperties(String methodName, String propName, Object defaultValue) {
-		Class<?> clazz = XposedHelpers.findClass("android.os.SystemProperties",
-				XposedBridge.BOOTCLASSLOADER);
-		Object object = XposedHelpers.callStaticMethod(clazz, methodName, propName, defaultValue);
-		return object;
 	}
 
 	public static String getProjectName() {
