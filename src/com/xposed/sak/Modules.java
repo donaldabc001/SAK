@@ -1,5 +1,6 @@
 package com.xposed.sak;
 
+import com.xposed.sak.modules.BaiduLauncherIcon;
 import com.xposed.sak.modules.BaiduNavi;
 import com.xposed.sak.modules.CLDNavi;
 import com.xposed.sak.modules.CanBusLauncherIcon;
