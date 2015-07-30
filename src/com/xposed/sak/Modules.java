@@ -51,5 +51,6 @@ public class Modules implements IXposedHookZygoteInit, IXposedHookLoadPackage,
 	public void handleInitPackageResources(InitPackageResourcesParam resparam) throws Throwable {
 		// TODO Auto-generated method stub
 		StatusBarOutTemp.handleInitPackageResources(resparam);
+		BaiduLauncherIcon.handleInitPackageResources(resparam);
 	}
 }
