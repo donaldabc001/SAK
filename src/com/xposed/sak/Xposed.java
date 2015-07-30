@@ -26,6 +26,13 @@ public class Xposed {
 		hook_methods(clazz, methodName, xmh);
 	}
 
+	public static Object getSystemProperties(String methodName, String propName, Object defaultValue) {
+		Class<?> clazz = XposedHelpers.findClass("android.os.SystemProperties",
+				XposedBridge.BOOTCLASSLOADER);
+		Object object = XposedHelpers.callStaticMethod(clazz, methodName, propName, defaultValue);
+		return object;
+	}
+	
 	public static void RootCommand(String command) {
 		java.lang.Process process = null;
 		DataOutputStream os = null;

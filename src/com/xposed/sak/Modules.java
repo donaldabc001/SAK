@@ -4,7 +4,9 @@ import com.xposed.sak.modules.BaiduNavi;
 import com.xposed.sak.modules.CLDNavi;
 import com.xposed.sak.modules.CanBusLauncherIcon;
 import com.xposed.sak.modules.ClearNotification;
+import com.xposed.sak.modules.ComponentTimeOut;
 import com.xposed.sak.modules.EnableWifi;
+import com.xposed.sak.modules.GalleryConstructorSlides;
 import com.xposed.sak.modules.GaodeNavi;
 import com.xposed.sak.modules.MonitorBroadcast;
 import com.xposed.sak.modules.MonitorStreamValue;
@@ -41,6 +43,8 @@ public class Modules implements IXposedHookZygoteInit, IXposedHookLoadPackage,
 		StatusBarOutTemp.handleLoadPackage(lpparam);
 		EnableWifi.handleLoadPackage(lpparam);
 		StopAppStart.handleLoadPackage(lpparam);
+		ComponentTimeOut.handleLoadPackage(lpparam);
+		GalleryConstructorSlides.handleLoadPackage(lpparam);
 	}
 
 	@Override
