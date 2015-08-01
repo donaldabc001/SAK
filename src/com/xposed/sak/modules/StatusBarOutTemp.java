@@ -26,7 +26,7 @@ public class StatusBarOutTemp {
 	private static float outTemp;
 	private static TextView mOutTempView;
 
-	private static boolean enable = false;
+	private static boolean enable = true;
 
 	private static String packageName = "com.luyuan.vehicleinformation";
 	private static XSharedPreferences xSharedPreferences = getSharedPreferences();
