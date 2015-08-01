@@ -9,6 +9,7 @@ import com.xposed.sak.modules.ComponentTimeOut;
 import com.xposed.sak.modules.EnableWifi;
 import com.xposed.sak.modules.GalleryConstructorSlides;
 import com.xposed.sak.modules.GaodeNavi;
+import com.xposed.sak.modules.HelloLayoutReplace;
 import com.xposed.sak.modules.MonitorBroadcast;
 import com.xposed.sak.modules.MonitorStreamValue;
 import com.xposed.sak.modules.StatusBarOutTemp;
@@ -27,7 +28,7 @@ public class Modules implements IXposedHookZygoteInit, IXposedHookLoadPackage,
 	@Override
 	public void initZygote(StartupParam startupParam) throws Throwable {
 		// TODO Auto-generated method stub
-		
+	    HelloLayoutReplace.initZygote(startupParam);
 	}
 
 	@Override
@@ -53,5 +54,6 @@ public class Modules implements IXposedHookZygoteInit, IXposedHookLoadPackage,
 		// TODO Auto-generated method stub
 		StatusBarOutTemp.handleInitPackageResources(resparam);
 		BaiduLauncherIcon.handleInitPackageResources(resparam);
+		HelloLayoutReplace.handleInitPackageResources(resparam);
 	}
 }
