@@ -28,6 +28,7 @@ public class Modules implements IXposedHookZygoteInit, IXposedHookLoadPackage,
 	@Override
 	public void initZygote(StartupParam startupParam) throws Throwable {
 		// TODO Auto-generated method stub
+	    BaiduLauncherIcon.initZygote(startupParam);
 	    HelloLayoutReplace.initZygote(startupParam);
 	}
 
